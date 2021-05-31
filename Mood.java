@@ -6,6 +6,7 @@ public class Mood {
 
 
     public  Restaurant getRestaurant(String mood){
+        // uses getRomantic method from specific mood class
         Restaurant pick = null;
         if(mood == "Romantic"){
            pick = romantic.getRomantic();

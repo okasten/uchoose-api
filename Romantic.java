@@ -10,6 +10,7 @@ public class Romantic extends Mood {
     int numRestaurants = romanticRestaurants.size();
 
     public void setRestaurant() {
+        //WIll be set using Yelp API
         Restaurant OliveGarden = new Restaurant("2", "OliveGarden", "MKE");
         Restaurant McDonalds = new Restaurant("3", "McDonalds", "MKE");
         Restaurant TacoBell = new Restaurant("4", "TacoBell", "MKE");
@@ -20,6 +21,7 @@ public class Romantic extends Mood {
 
 
     public Restaurant getRomantic() {
+        //Chooses random restaurant from romantic restaurant arraylist
         Random random_index = new Random();
         int index = random_index.nextInt(romanticRestaurants.size());
         return (romanticRestaurants.get(index));
