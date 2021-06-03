@@ -1,6 +1,8 @@
 import java.util.*;
 import java.io.*;
 import java.net.*;
+import org.json.*;
+
 
 public class Restaurant{
     public String id;
@@ -32,8 +34,7 @@ private static String getKey(){
     return "Bearer "+ prop.getProperty("api_key");
     }   
 
-
-public static void getResturant(QueryString query) throws MalformedURLException, IOException{
+public static void getResturant(QueryString query) throws MalformedURLException, IOException, JSONException{
     URL url = new URL(query.toString());
     HttpURLConnection con = (HttpURLConnection) url.openConnection();
     con.setRequestProperty("Authorization", getKey());
@@ -48,7 +49,7 @@ public static void getResturant(QueryString query) throws MalformedURLException,
             response.append(inputLine);
         }
         in.close();
-        System.out.println(response.toString());
+        processResults(response.toString());
 		} 
         else {
 			System.out.println("GET request not worked");
@@ -56,8 +57,21 @@ public static void getResturant(QueryString query) throws MalformedURLException,
 
 	}
 
+    public static Restaurant processResults(String response) throws JSONException {
+        Random rand = new Random();
+        int upperbound = 20;
+        int pick = rand.nextInt(upperbound);
+        JSONObject object = new JSONObject(response);
+        JSONArray getArray = object.getJSONArray("businesses");
+        JSONObject resturant = getArray.getJSONObject(pick);
+        String address = (resturant.getJSONObject("location").getJSONArray("display_address")).toString();
+        Restaurant result = new Restaurant(resturant.getString("id"),resturant.getString("name"),address);
+        return result;
 
-    public static void main(String[] args) throws MalformedURLException,IOException {
+    }
+
+
+    public static void main(String[] args) throws MalformedURLException,IOException, JSONException {
         QueryString query = new QueryString("location","01503");
         getResturant(query);
     }
