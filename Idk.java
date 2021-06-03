@@ -6,7 +6,7 @@ public class Idk extends Mood{
     Map<String, String> searchValues = new HashMap<String,String>() {{
         put("price","1,2,3");
         put("category","Restaurants");
-        put("attributes", "hot_and_new");
+        put("sort_by","rating");
     }};
 
     public QueryString getIdk() {

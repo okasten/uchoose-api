@@ -7,6 +7,7 @@ public class Mood  {
     static Healthy healthy = new Healthy();
     static Tired tired = new Tired();
     static Lazy lazy = new Lazy();
+    static Idk idk = new Idk();
     QueryString qs;
 
     public  QueryString getQs(String mood){
@@ -26,6 +27,9 @@ public class Mood  {
         if(mood.equalsIgnoreCase("lazy")){
             qs = lazy.getLazy();
         }
+        if(mood.equalsIgnoreCase("idk")){
+            qs = idk.getIdk();
+        }
         return qs;
     }
 
@@ -36,6 +40,7 @@ public class Mood  {
         System.out.println(Mood.healthy.getQs("HeALtHY"));
         System.out.println(Mood.tired.getQs("TIrEd"));
         System.out.println(Mood.lazy.getQs("lAzy"));
+        System.out.println(Mood.idk.getQs("idk"));
     }
 }
 
