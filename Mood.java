@@ -1,27 +1,21 @@
 import java.util.ArrayList;
 
-public class Mood {
-    String price;
+public class Mood  {
+    User user = new User();
     static Romantic romantic = new Romantic();
+    QueryString qs;
 
-
-    public  Restaurant getRestaurant(String mood){
+    public  QueryString getRestaurant(String mood){
         // uses getRomantic method from specific mood class
-        Restaurant pick = null;
         if(mood == "Romantic"){
-           pick = romantic.getRomantic();
-
+           qs = romantic.getRomantic();
         }
-        return pick;
+        return qs;
     }
 
     public static void main(String[] args) {
 
-
-        Mood.romantic.setRestaurant();
-        Restaurant pick = romantic.getRestaurant("Romantic");
-
-        System.out.println(pick.name);
+        System.out.println(Mood.romantic.getRestaurant("Romantic"));
     }
 }
 
