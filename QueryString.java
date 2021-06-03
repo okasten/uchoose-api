@@ -4,7 +4,7 @@ import java.net.URLEncoder;
 
 public class QueryString {
     
-    private String query = "";
+    private String query = "https://api.yelp.com/v3/businesses/search?";
     
     public QueryString(String name, String value) {
     encode(name, value);
