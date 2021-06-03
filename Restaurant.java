@@ -17,6 +17,9 @@ public Restaurant(String id, String name, String location){
 
 }
 
+public Restaurant() {
+}
+
 private static String getKey(){
     Properties prop = new Properties();
     String fileName = "app.config";
@@ -34,13 +37,13 @@ private static String getKey(){
     return "Bearer "+ prop.getProperty("api_key");
     }   
 
-public static void getResturant(QueryString query) throws MalformedURLException, IOException, JSONException{
+public static Restaurant getResturant(QueryString query) throws MalformedURLException, IOException, JSONException{
+    Restaurant result = new Restaurant();
     URL url = new URL(query.toString());
     HttpURLConnection con = (HttpURLConnection) url.openConnection();
     con.setRequestProperty("Authorization", getKey());
     con.setRequestMethod("GET");
     int responseCode = con.getResponseCode();
-    System.out.println("GET Response Code :: " + responseCode);
     if (responseCode == HttpURLConnection.HTTP_OK) { // success
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String inputLine;
@@ -49,11 +52,13 @@ public static void getResturant(QueryString query) throws MalformedURLException,
             response.append(inputLine);
         }
         in.close();
-        processResults(response.toString());
+        result = processResults(response.toString());
+       
 		} 
         else {
 			System.out.println("GET request not worked");
 		}
+        return result;
 
 	}
 
