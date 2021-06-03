@@ -1,30 +1,20 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
+import java.util.*;
 
 public class Romantic extends Mood {
 
-    ArrayList<Restaurant> romanticRestaurants = new ArrayList<Restaurant>();
+    Map<String, String> searchValues = new HashMap<String,String>() {{
+        put("price","2,3");
+        put("term","romantic");
+        put("category","Restaurants");
+    }};
 
+    public QueryString getRomantic() {
+        QueryString qs = new QueryString("location", user.location);
+            searchValues.forEach((k,v) -> qs.add(k,v));
 
-    int numRestaurants = romanticRestaurants.size();
-
-    public void setRestaurant() {
-        //WIll be set using Yelp API
-        Restaurant OliveGarden = new Restaurant("2", "OliveGarden", "MKE");
-        Restaurant McDonalds = new Restaurant("3", "McDonalds", "MKE");
-        Restaurant TacoBell = new Restaurant("4", "TacoBell", "MKE");
-        romanticRestaurants.add(OliveGarden);
-        romanticRestaurants.add(McDonalds);
-        romanticRestaurants.add(TacoBell);
+            return qs;
     }
 
 
-    public Restaurant getRomantic() {
-        //Chooses random restaurant from romantic restaurant arraylist
-        Random random_index = new Random();
-        int index = random_index.nextInt(romanticRestaurants.size());
-        return (romanticRestaurants.get(index));
     }
 
-}

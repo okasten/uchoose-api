@@ -74,6 +74,10 @@ public static void getResturant(QueryString query) throws MalformedURLException,
     public static void main(String[] args) throws MalformedURLException,IOException, JSONException {
         QueryString query = new QueryString("location","01503");
         getResturant(query);
+
+        Mood moodSearch = new Mood();
+        QueryString qs = moodSearch.getQs("tired");
+        getResturant(qs);
     }
 
 
