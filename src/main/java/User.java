@@ -18,37 +18,23 @@ public class User{
         this.firstName = firstName;
         this.lastName = lastName;
         this.location = location; 
-
-        
-        createUserAccount();
-    
-
+        createUserAccount(username, firstName, lastName, location);
     }
 
     public User(){    
-        Scanner scn = new Scanner(System.in);
-        System.out.println("Enter Username");
-        this.username = scn.nextLine();
-        System.out.println("Enter First Name");
-        this.firstName = scn.nextLine();
-        System.out.println("Enter Last Name");
-        this.lastName = scn.nextLine();
-        System.out.println("Enter Zipcode");
-        this.location = scn.nextLine();
-        createUserAccount();
     }
 
     public void changeLocation( String location){
         this.location = location;
     }
-    public boolean userExists(){
+    public static boolean userExists(String username){
         boolean results = false;
         File file = new File("data/Users.txt");
         try {
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                if(line.contains(this.username)) { 
+                if(line.contains(username)) { 
                     System.out.println("User already exists.");
                     results = true;
                 }
@@ -59,21 +45,25 @@ public class User{
         return results;
     }
 
-    public void createUserAccount(){
-        if (!userExists()){
+    public static boolean createUserAccount(String username, String firstName, String lastName, String location){
+        if (!userExists(username)){
             try{
                 FileWriter myWriter = new FileWriter("data/Users.txt", true);
                 BufferedWriter bw = new BufferedWriter(myWriter);
                 PrintWriter out = new PrintWriter(bw);
-                String userInfo = this.username + "," + this.firstName + "," + this.lastName + "," + this.location;
+                String userInfo = username + "," + firstName + "," + lastName + "," + location;
                 out.println(userInfo);
                 out.close();
+                return true;
             }
-            catch (IOException e){}
+            catch (IOException e){
+                return false;
+            }
             
         }
         else{
             System.out.println("User already exists.");
+            return false;
         }
         
     }
