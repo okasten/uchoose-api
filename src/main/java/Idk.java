@@ -10,7 +10,7 @@ public class Idk extends Mood{
     }};
 
     public QueryString getIdk() {
-        QueryString qs = new QueryString("location", user.location);
+        QueryString qs = new QueryString("location", location);
         searchValues.forEach((k,v) -> qs.add(k,v));
 
         return qs;

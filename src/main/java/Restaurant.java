@@ -8,19 +8,14 @@ public class Restaurant{
     public String id;
     public String name;
     public String location;
-    public int longitude;
-    public int latitude;
+    public String longitude;
+    public String latitude;
+    public static User user = new User();
 
 public Restaurant() {}
 
-public Restaurant(String id, String name, String location){
-    this.id = id;
-    this.name = name;
-    this.location = location;
 
-}
-
-public Restaurant(String id, String name, String location, int longitude, int latitude){
+public Restaurant(String id, String name, String location, String longitude, String latitude){
     this.id = id;
     this.name = name; 
     this.location = location;
@@ -32,7 +27,7 @@ public Restaurant(String id, String name, String location, int longitude, int la
 
 private static String getKey(){
     Properties prop = new Properties();
-    String fileName = "app.config";
+    String fileName = "src/app.config";
     InputStream is = null;
     try {
         is = new FileInputStream(fileName);
@@ -80,25 +75,37 @@ public static Restaurant getResturant(QueryString query) throws MalformedURLExce
         JSONArray getArray = object.getJSONArray("businesses");
         JSONObject resturant = getArray.getJSONObject(pick);
         String address = (resturant.getJSONObject("location").getJSONArray("display_address")).toString();
-        Restaurant result = new Restaurant(resturant.getString("id"),resturant.getString("name"),address);
+        String longitude = (String.valueOf(resturant.getJSONObject("coordinates").getDouble("longitude")));
+        String latitude = (String.valueOf(resturant.getJSONObject("coordinates").getDouble("latitude")));
+        Restaurant result = new Restaurant(resturant.getString("id"),resturant.getString("name"),address,longitude,latitude);
         return result;
+
+    }
+
+    public static String feelingAdventurous() throws MalformedURLException,IOException, JSONException{
+    Restaurant mysteryRestaurant;
+        QueryString query = new QueryString("location",user.location);
+        mysteryRestaurant = (getResturant(query));
+        return ( mysteryRestaurant.latitude + "," + mysteryRestaurant.longitude);
 
     }
     @Override
     public String toString(){
-    String restaurant = this.name + "\n" + this.location;
-    return restaurant;
+        return this.name + "\n" + this.location;
     }
 
 
-    public static void main(String[] args) throws MalformedURLException,IOException, JSONException {
-        QueryString query = new QueryString("location","01503");
-        System.out.println(getResturant(query));
 
-        Mood moodSearch = new Mood();
-        QueryString qs = moodSearch.getQs("lazy");
-        System.out.println(getResturant(qs));
-    }
+//    public static void main(String[] args) throws MalformedURLException,IOException, JSONException {
+//        QueryString query = new QueryString("location","01503");
+//        System.out.println(getResturant(query));
+//
+//        Mood moodSearch = new Mood();
+//        QueryString qs = moodSearch.getQs("lazy");
+//        System.out.println(getResturant(qs));
+//
+//        System.out.println(feelingAdventurous());
+//    }
 
 
 

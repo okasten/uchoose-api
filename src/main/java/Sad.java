@@ -6,7 +6,7 @@ public class Sad extends Mood{
     }};
 
     public QueryString getSad() {
-        QueryString qs = new QueryString("location", user.location);
+        QueryString qs = new QueryString("location", location);
         searchValues.forEach((k,v) -> qs.add(k,v));
 
         return qs;

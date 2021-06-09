@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Mood  {
-    static User user = new User();
+    String location = Restaurant.user.location;
     static Romantic romantic = new Romantic();
     static Sad sad = new Sad();
     static Healthy healthy = new Healthy();
