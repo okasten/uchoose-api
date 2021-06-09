@@ -84,6 +84,10 @@ public static Restaurant getResturant(QueryString query) throws MalformedURLExce
         return result;
 
     }
+    @Override
+    public String toString(){
+    return this.name;
+    }
 
 
     public static void main(String[] args) throws MalformedURLException,IOException, JSONException {
