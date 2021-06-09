@@ -58,12 +58,11 @@ public static Restaurant getResturant(QueryString query) throws MalformedURLExce
         }
         in.close();
         result = processResults(response.toString());
-       
 		} 
         else {
 			System.out.println("GET request not worked");
 		}
-        //addtoViewed(result);
+
         return result;
 
 	}
@@ -96,9 +95,11 @@ public static Restaurant getResturant(QueryString query) throws MalformedURLExce
     }
 
 
-//    public static void main(String[] args) throws MalformedURLException,IOException, JSONException {
-//        QueryString query = new QueryString("location","01503");
-//        System.out.println(getResturant(query));
+  public static void main(String[] args) throws MalformedURLException,IOException, JSONException {
+        QueryString query = new QueryString("location","01503");
+      Restaurant r = (getResturant(query));
+      System.out.println(r.user.viewedRestaurants);
+
 //
 //        Mood moodSearch = new Mood();
 //        QueryString qs = moodSearch.getQs("lazy");
@@ -106,7 +107,7 @@ public static Restaurant getResturant(QueryString query) throws MalformedURLExce
 //
 //        System.out.println(feelingAdventurous());
 
-  //}
+  }
 
 
 

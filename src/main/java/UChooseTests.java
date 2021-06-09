@@ -23,7 +23,7 @@ public class UChooseTests {
 
     }
 
-    @Test
+    @Test //RestaurantClassTest
     public void restaurantToStringTest() throws JSONException, IOException {
         InputStream sysInBackup = System.in; // backup System.in to restore it later
         ByteArrayInputStream in = new ByteArrayInputStream(("jdoe"+ System.lineSeparator()+ "John"+System.lineSeparator()+"Doe"+System.lineSeparator()+"01503").getBytes());
@@ -35,5 +35,16 @@ public class UChooseTests {
         String expected = r.name + "\n" +r.location;
         Assert.assertEquals(actual,expected);
     }
+
+//    @Test
+//    public void addToViewedRestaurantsTest(){
+//        InputStream sysInBackup = System.in; // backup System.in to restore it later
+//        ByteArrayInputStream in = new ByteArrayInputStream(("jdoe"+ System.lineSeparator()+ "John"+System.lineSeparator()+"Doe"+System.lineSeparator()+"01503").getBytes());
+//        System.setIn(in);
+//        String expectedLocation = "01503";
+//        QueryString query = new QueryString("location",expectedLocation);
+//        Restaurant r = (Restaurant.getResturant(query));
+//
+//    }
 
 }

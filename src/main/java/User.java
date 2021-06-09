@@ -4,7 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.*;
-import org.apache.commons.io;
+
 
 public class User{
     public String username;
@@ -35,6 +35,7 @@ public class User{
         this.lastName = scn.nextLine();
         System.out.println("Enter Zipcode");
         this.location = scn.nextLine();
+        createUserAccount();
     }
 
     public void changeLocation( String location){

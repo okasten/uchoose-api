@@ -8,5 +8,13 @@ public class ViewedRestaurants{
      viewedRestaurants.add(r);
      return viewedRestaurants;
  }
+
+ public String toString(){
+     String viewed= "";
+     for (Restaurant r:viewedRestaurants){
+         viewed +=r;
+     }
+         return viewed;
+ }
 }
 

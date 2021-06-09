@@ -1,1 +1,3 @@
 vee123,Vee,Nguyen,02132Test write into file
+awatkins,Andrea,Watkins,60622
+Olivia,K,K,60622
