@@ -6,7 +6,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class RestaurantTest {
+public class UChooseTests {
 
     @Test
     public void NoRepeatRestaurantsBackToBackTest() throws JSONException, IOException {
