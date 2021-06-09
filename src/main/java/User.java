@@ -8,7 +8,7 @@ public class User{
     public String firstName;
     public String lastName;
     public String location;
-    public ArrayList<Restaurant> viewedRestaurants;
+    public ViewedRestaurants viewedRestaurants;
 
     public User(String username, String firstName, String lastName, String location){
         this.username = username;
