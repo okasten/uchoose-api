@@ -1,10 +1,14 @@
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class User{
     public String username;
     public String firstName;
     public String lastName;
     public String location;
+    public ArrayList<Restaurant> viewedRestaurants;
 
     public User(String username, String firstName, String lastName, String location){
         this.username = username;
@@ -14,6 +18,7 @@ public class User{
     }
 
     public User(){
+            
         Scanner scn = new Scanner(System.in);
         System.out.println("Enter Username");
         this.username = scn.nextLine();
@@ -23,10 +28,22 @@ public class User{
         this.lastName = scn.nextLine();
         System.out.println("Enter Zipcode");
         this.location = scn.nextLine();
+
+        try{
+            FileWriter myWriter = new FileWriter("Users.txt", true);
+            
+        }
+        catch (IOException e){}
+    
     }
 
     public void changeLocation( String location){
         this.location = location;
     }
+
+    
+
+
+    
 
 }
