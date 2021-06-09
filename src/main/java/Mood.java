@@ -8,29 +8,34 @@ public class Mood  {
     static Tired tired = new Tired();
     static Lazy lazy = new Lazy();
     static Idk idk = new Idk();
+    public static String[] moods = {"Romantic","Sad","Healthy","Tired","Lazy","Idk"};
     QueryString qs;
 
     public  QueryString getQs(String mood){
 
-        if(mood.equalsIgnoreCase("romantic")){
+        if(mood.equalsIgnoreCase(moods[0])){
            qs = romantic.getRomantic();
         }
-        if(mood.equalsIgnoreCase("sad")) {
+        if(mood.equalsIgnoreCase(moods[1])) {
             qs = sad.getSad();
         }
-        if(mood.equalsIgnoreCase("healthy")) {
+        if(mood.equalsIgnoreCase(moods[2])) {
             qs = healthy.getHealthy();
         }
-        if(mood.equalsIgnoreCase("tired")){
+        if(mood.equalsIgnoreCase(moods[3])){
             qs = tired.getTired();
         }
-        if(mood.equalsIgnoreCase("lazy")){
+        if(mood.equalsIgnoreCase(moods[4])){
             qs = lazy.getLazy();
         }
-        if(mood.equalsIgnoreCase("idk")){
+        if(mood.equalsIgnoreCase(moods[5])){
             qs = idk.getIdk();
         }
         return qs;
+    }
+
+    public static String[] getMoods(){
+       return moods;
     }
 
     public static void main(String[] args) {
