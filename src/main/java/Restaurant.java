@@ -96,16 +96,16 @@ public static Restaurant getResturant(QueryString query) throws MalformedURLExce
 
 
 
-//    public static void main(String[] args) throws MalformedURLException,IOException, JSONException {
-//        QueryString query = new QueryString("location","01503");
-//        System.out.println(getResturant(query));
+    public static void main(String[] args) throws MalformedURLException,IOException, JSONException {
+        QueryString query = new QueryString("location","01503");
+        System.out.println(getResturant(query));
 //
 //        Mood moodSearch = new Mood();
 //        QueryString qs = moodSearch.getQs("lazy");
 //        System.out.println(getResturant(qs));
 //
 //        System.out.println(feelingAdventurous());
-//    }
+   }
 
 
 
