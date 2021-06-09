@@ -19,6 +19,10 @@ public class User{
         this.lastName = lastName;
         this.location = location; 
 
+        
+        createUserAccount();
+    
+
     }
 
     public User(){    
@@ -37,6 +41,7 @@ public class User{
         this.location = location;
     }
     public boolean userExists(){
+        boolean results = false;
         File file = new File("data/Users.txt");
         try {
             Scanner scanner = new Scanner(file);
@@ -44,63 +49,38 @@ public class User{
                 String line = scanner.nextLine();
                 if(line.contains(this.username)) { 
                     System.out.println("User already exists.");
-                    return true;
+                    results = true;
                 }
             }
         } 
         catch(FileNotFoundException e) {
         }
-        File file = new File("data/Users.txt");
-        try {
-            Scanner scanner = new Scanner(file);
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                if(line.contains(this.username)) { 
-                    System.out.println("User already exists.");
-                    return true;
-                }
-            }
-        } catch(FileNotFoundException e) {
-        }
-        return false; 
+        return results;
     }
 
     public void createUserAccount(){
-        
-        try{
-            FileWriter myWriter = new FileWriter("data/Users.txt", true);
-            BufferedWriter bw = new BufferedWriter(myWriter);
-            PrintWriter out = new PrintWriter(bw);
-            String userInfo = this.username + "," + this.firstName + "," + this.lastName + "," + this.location;
-            out.println(userInfo);
-            out.close();
+        if (!userExists()){
+            try{
+                FileWriter myWriter = new FileWriter("data/Users.txt", true);
+                BufferedWriter bw = new BufferedWriter(myWriter);
+                PrintWriter out = new PrintWriter(bw);
+                String userInfo = this.username + "," + this.firstName + "," + this.lastName + "," + this.location;
+                out.println(userInfo);
+                out.close();
+            }
+            catch (IOException e){}
+            
         }
-
-        catch (IOException e){}
+        else{
+            System.out.println("User already exists.");
+        }
+        
     }
 
 
     public static void main(String[] args){
-        File file = new File("data/Users.txt");
-        try {
-            Scanner scanner = new Scanner(file);
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                if(line.contains("vee143")) { 
-                    System.out.println("User already exists.");
-                }
-            }
-        } catch(FileNotFoundException e) {
-        }
-        
-        
-        
+        User testUser = new User();
 
     }
-
-    
-
-
-    
 
 }
