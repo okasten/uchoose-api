@@ -86,7 +86,8 @@ public static Restaurant getResturant(QueryString query) throws MalformedURLExce
     }
     @Override
     public String toString(){
-    return this.name;
+    String restaurant = this.name + "\n" + this.location;
+    return restaurant;
     }
 
 
@@ -94,9 +95,9 @@ public static Restaurant getResturant(QueryString query) throws MalformedURLExce
         QueryString query = new QueryString("location","01503");
         System.out.println(getResturant(query));
 
-        //Mood moodSearch = new Mood();
-        //QueryString qs = moodSearch.getQs("tired");
-        //getResturant(qs);
+        Mood moodSearch = new Mood();
+        QueryString qs = moodSearch.getQs("lazy");
+        System.out.println(getResturant(qs));
     }
 
 
