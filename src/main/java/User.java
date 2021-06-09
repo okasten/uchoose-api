@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -7,6 +8,7 @@ public class User{
     public String firstName;
     public String lastName;
     public String location;
+    public ArrayList<Restaurant> viewedRestaurants;
 
     public User(String username, String firstName, String lastName, String location){
         this.username = username;
@@ -32,6 +34,7 @@ public class User{
             
         }
         catch (IOException e){}
+    
     }
 
     public void changeLocation( String location){
