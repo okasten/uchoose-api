@@ -31,6 +31,7 @@ public class User{
 
         try{
             FileWriter myWriter = new FileWriter("Users.txt", true);
+            myWriter.write(this.username + this.firstName);
             
         }
         catch (IOException e){}
@@ -39,6 +40,12 @@ public class User{
 
     public void changeLocation( String location){
         this.location = location;
+    }
+
+
+    public static void main(String[] args){
+        User user = new User();
+
     }
 
     
