@@ -36,15 +36,33 @@ public class UChooseTests {
         Assert.assertEquals(actual,expected);
     }
 
-//    @Test
-//    public void addToViewedRestaurantsTest(){
-//        InputStream sysInBackup = System.in; // backup System.in to restore it later
-//        ByteArrayInputStream in = new ByteArrayInputStream(("jdoe"+ System.lineSeparator()+ "John"+System.lineSeparator()+"Doe"+System.lineSeparator()+"01503").getBytes());
-//        System.setIn(in);
-//        String expectedLocation = "01503";
-//        QueryString query = new QueryString("location",expectedLocation);
-//        Restaurant r = (Restaurant.getResturant(query));
-//
-//    }
+    @Test
+    public void feelingAdventurousTest() throws JSONException, IOException {
+        InputStream sysInBackup = System.in; // backup System.in to restore it later
+        ByteArrayInputStream in = new ByteArrayInputStream(("jdoe"+ System.lineSeparator()+ "John"+System.lineSeparator()+"Doe"+System.lineSeparator()+"01503").getBytes());
+        System.setIn(in);
+        String expectedLocation = "01503";
+        QueryString query1 = new QueryString("location",expectedLocation);
+        QueryString query2 = new QueryString("location",expectedLocation);
+        String r1 = Restaurant.feelingAdventurous();
+        String r2 = Restaurant.feelingAdventurous();
+
+
+        Assert.assertNotSame(r1,r2);
+    }
+    @Test
+    public void getRestaurantNotWorkedTest() throws JSONException, IOException {
+        InputStream sysInBackup = System.in; // backup System.in to restore it later
+        ByteArrayInputStream in = new ByteArrayInputStream(("jdoe"+ System.lineSeparator()+ "John"+System.lineSeparator()+"Doe"+System.lineSeparator()+"01503").getBytes());
+        System.setIn(in);
+        String expectedLocation = "01503";
+        QueryString query1 = new QueryString("locaion",expectedLocation);
+        Restaurant r = new Restaurant();
+        String r1= r.toString();
+        Assert.assertEquals(r1,Restaurant.getResturant(query1).toString());
+
+
+
+    }
 
 }

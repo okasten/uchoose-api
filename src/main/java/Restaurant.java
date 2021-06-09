@@ -14,7 +14,6 @@ public class Restaurant{
 
 public Restaurant() {}
 
-
 public Restaurant(String id, String name, String location, String longitude, String latitude){
     this.id = id;
     this.name = name; 
@@ -95,10 +94,10 @@ public static Restaurant getResturant(QueryString query) throws MalformedURLExce
     }
 
 
-  public static void main(String[] args) throws MalformedURLException,IOException, JSONException {
-        QueryString query = new QueryString("location","01503");
-      Restaurant r = (getResturant(query));
-      System.out.println(r.user.viewedRestaurants);
+//  public static void main(String[] args) throws MalformedURLException,IOException, JSONException {
+//        QueryString query = new QueryString("location","01503");
+//      Restaurant r = (getResturant(query));
+     // System.out.println(r.user.viewedRestaurants);
 
 //
 //        Mood moodSearch = new Mood();
@@ -111,6 +110,5 @@ public static Restaurant getResturant(QueryString query) throws MalformedURLExce
 
 
 
-}
 
 
