@@ -35,7 +35,7 @@ public class User{
         createUserAccount(username, firstName, lastName, location);
     }
 
-    public void changeLocation( String location){
+    public void changeLocation(String location){
         this.location = location;
     }
     public static boolean userExists(String username){
