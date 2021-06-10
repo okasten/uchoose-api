@@ -1,13 +1,13 @@
 import java.util.*;
 public class Sad extends Mood{
-    Map<String, String> searchValues = new HashMap<>() {{
+    static Map<String, String> searchValues = new HashMap<>() {{
         put("price","1");
         put("term","dessert");
     }};
 
-    public QueryString getSad() {
+    public static QueryString getSad(String location) {
         QueryString qs = new QueryString("location", location);
-        searchValues.forEach((k,v) -> qs.add(k,v));
+        searchValues.forEach(qs::add);
 
         return qs;
     }

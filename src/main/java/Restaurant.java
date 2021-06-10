@@ -60,7 +60,7 @@ public class Restaurant {
         } else {
             System.out.println("GET request not worked");
         }
-        user.viewed.addToViewed(result);
+       // user.viewed.addToViewed(result);
         return result;
 
     }
@@ -95,16 +95,18 @@ public class Restaurant {
 
 
     public static void main(String[] args) throws MalformedURLException, IOException, JSONException {
+        User testUser = new User("Test", "Test", "Test", "60622");
+
         QueryString query = new QueryString("location", "01503");
         Restaurant r = (getResturant(query));
         System.out.println(User.viewed);
 
 
         Mood moodSearch = new Mood();
-        QueryString qs = moodSearch.getQs("lazy");
+        QueryString qs = moodSearch.getQs("lazy",testUser.location);
         System.out.println(getResturant(qs));
 
-        System.out.println(feelingAdventurous());
+        System.out.println(feelingAdventurous(testUser.location));
 
     }
 }

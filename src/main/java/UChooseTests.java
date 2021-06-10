@@ -44,8 +44,8 @@ public class UChooseTests {
         String expectedLocation = "01503";
         QueryString query1 = new QueryString("location",expectedLocation);
         QueryString query2 = new QueryString("location",expectedLocation);
-        String r1 = Restaurant.feelingAdventurous();
-        String r2 = Restaurant.feelingAdventurous();
+        String r1 = Restaurant.feelingAdventurous(expectedLocation);
+        String r2 = Restaurant.feelingAdventurous(expectedLocation);
 
 
         Assert.assertNotSame(r1,r2);
