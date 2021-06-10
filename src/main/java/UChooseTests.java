@@ -65,4 +65,11 @@ public class UChooseTests {
 
     }
 
+    @Test
+    public void changeLocation(){
+        User user = new User("awatkins","Andrea","Watkins","60622");
+        user.changeLocation("02132");
+        Assert.assertEquals(02132, user.location);
+    }
+
 }
