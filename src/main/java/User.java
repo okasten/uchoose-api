@@ -11,17 +11,28 @@ public class User{
     public String firstName;
     public String lastName;
     public String location;
-    public ViewedRestaurants viewedRestaurants;
+    public static ViewedRestaurants viewed = new ViewedRestaurants();
 
     public User(String username, String firstName, String lastName, String location){
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.location = location; 
+        this.location = location;
+
         createUserAccount(username, firstName, lastName, location);
     }
 
-    public User(){    
+    public User(){
+        Scanner scn = new Scanner(System.in);
+        System.out.println("Enter Username");
+        this.username = scn.nextLine();
+        System.out.println("Enter First Name");
+        this.firstName = scn.nextLine();
+        System.out.println("Enter Last Name");
+        this.lastName = scn.nextLine();
+        System.out.println("Enter Zipcode");
+        this.location = scn.nextLine();
+        createUserAccount(username, firstName, lastName, location);
     }
 
     public void changeLocation( String location){
