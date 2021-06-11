@@ -141,6 +141,8 @@ public class UChooseTests {
         int upperbound = 1000;
         int num = rand.nextInt(upperbound);
         User test = new User("Test"+ num, "Test", "Test", "60622");
+        User actual = User.userExists("Test"+num);
+        Assert.assertEquals("Test"+num, actual.username);
 
     }
     }
