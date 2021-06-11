@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -12,6 +14,7 @@ public class User{
     public String lastName;
     public String location;
     public static ViewedRestaurants viewed = new ViewedRestaurants();
+
 
     public User(String username, String firstName, String lastName, String location){
         this.username = username;

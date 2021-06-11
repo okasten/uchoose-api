@@ -10,7 +10,7 @@ public class Restaurant {
     public String location;
     public String longitude;
     public String latitude;
-    //public static User user = new User("awatkins","Andrea","Watkins", "60622");
+    public static User user = new User();
 
     public Restaurant() {
     }
@@ -60,7 +60,8 @@ public class Restaurant {
         } else {
             System.out.println("GET request not worked");
         }
-       // user.viewed.addToViewed(result);
+        user.viewed.addToViewed(result);
+        UserHistory.addUser(user);
         return result;
 
     }
@@ -94,12 +95,18 @@ public class Restaurant {
     }
 
 
-//    public static void main(String[] args) throws MalformedURLException, IOException, JSONException {
-//        User testUser = new User("Test", "Test", "Test", "60622");
+    public static void main(String[] args) throws MalformedURLException, IOException, JSONException {
+
+       User testUser = new User("Test", "Test", "Test", "60622");
 //
-//        QueryString query = new QueryString("location", "01503");
-//        Restaurant r = (getResturant(query));
-//        System.out.println(User.viewed);
+       QueryString query = new QueryString("location", "01503");
+        Restaurant r = (getResturant(query));
+        QueryString query1 = new QueryString("location", "01503");
+        Restaurant r2 = (getResturant(query));
+        QueryString query2 = new QueryString("location", "01503");
+        Restaurant r3 = (getResturant(query));
+        //System.out.println(testUser.viewed);
+        System.out.println(UserHistory.viewAllHistory());
 //
 //
 //        Mood moodSearch = new Mood();
@@ -108,7 +115,7 @@ public class Restaurant {
 //
 //        System.out.println(feelingAdventurous(testUser.location));
 //
-//    }
+   }
 }
 
 
