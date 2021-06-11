@@ -8,6 +8,7 @@ class AppGui{
     private JLabel statusLabel;
     private JPanel controlPanel;
     private JLabel msglabel;
+    private User user;
 
     public AppGui(){
         prepareGUI();
@@ -50,7 +51,6 @@ class AppGui{
         
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            //    statusLabel.setText("A Frame shown to the user.");
                showLoginFrame();
                controlPanel.remove(loginButton);
                controlPanel.remove(signupButton);
@@ -86,6 +86,7 @@ class AppGui{
             public void actionPerformed(ActionEvent e){
                 boolean validated = User.createUserAccount(username.getText(), firstName.getText(), lastName.getText(), zipcode.getText());
                 if(validated){
+                    user = new User(username.getText(), firstName.getText(), lastName.getText(), zipcode.getText(), false);
                     controlPanel.remove(username);
                     controlPanel.remove(firstName);
                     controlPanel.remove(lastName);
@@ -95,7 +96,6 @@ class AppGui{
                 else{
                     statusLabel.setText("Username already exists, please choose a different username.");
                 }
-                
             }
         });
 
@@ -108,12 +108,14 @@ class AppGui{
         controlPanel.add(username);
 
         JButton login = new JButton("Login");
+        controlPanel.add(login);
         login.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                boolean validated = User.userExists(username.getText());
-                if(validated){
+                user = User.userExists(username.getText());
+                if(user != null){
                     controlPanel.remove(username);
                     controlPanel.remove(login);
+                    showFindRestaurantFrame();
                 }
                 else{
                     statusLabel.setText("User does not exist, please create an account.");
@@ -121,8 +123,24 @@ class AppGui{
                 
             }
         });
+    }
 
-        controlPanel.add(login);
+    private void showFindRestaurantFrame(){
+        headerLabel.setText("I'm Hungry");
+        JLabel moodLabel = new JLabel("What's your mood?");
+        JComboBox<String> moodsDropdown = new JComboBox<String>(Mood.getMoods());
+        JButton searchButton = new JButton("Find me FOOD!");
+        
+        controlPanel.add(moodLabel);
+        controlPanel.add(moodsDropdown);
+        controlPanel.add(searchButton);
+
+        searchButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                QueryString qs = Mood.getQs("tired", user.location);
+                System.out.println(qs);
+            }
+        });
     }
 
 }
