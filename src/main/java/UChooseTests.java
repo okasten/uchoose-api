@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Random;
 
 import static org.junit.Assert.fail;
 
@@ -131,6 +132,15 @@ public class UChooseTests {
         String[] moods = mood.getMoods();
         String[] expectedMoods = {"Romantic","Sad","Healthy","Tired","Lazy","Idk"};
         Assert.assertArrayEquals(moods,expectedMoods);
+
+    }
+
+    @Test
+    public void createUser(){
+        Random rand = new Random();
+        int upperbound = 1000;
+        int num = rand.nextInt(upperbound);
+        User test = new User("Test"+ num, "Test", "Test", "60622");
 
     }
     }
