@@ -22,6 +22,15 @@ public class User{
         createUserAccount(username, firstName, lastName, location);
     }
 
+    public User(String username, String firstName, String lastName, String location, boolean store){
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.location = location;
+
+        if(store) createUserAccount(username, firstName, lastName, location);
+    }
+
     public User(){
 
     }
@@ -29,8 +38,8 @@ public class User{
     public void changeLocation(String location){
         this.location = location;
     }
-    public static boolean userExists(String username){
-        boolean results = false;
+    public static User userExists(String username){
+        User results = null;
         File file = new File("data/Users.txt");
         try {
             Scanner scanner = new Scanner(file);
@@ -38,7 +47,8 @@ public class User{
                 String line = scanner.nextLine();
                 if(line.contains(username)) { 
                     System.out.println("User already exists.");
-                    results = true;
+                    String[] attrs = line.split(",");
+                    return new User(attrs[0], attrs[1], attrs[2], attrs[3], false);
                 }
             }
         } 
@@ -48,7 +58,7 @@ public class User{
     }
 
     public static boolean createUserAccount(String username, String firstName, String lastName, String location){
-        if (!userExists(username)){
+        if (userExists(username) == null){
             try{
                 FileWriter myWriter = new FileWriter("data/Users.txt", true);
                 BufferedWriter bw = new BufferedWriter(myWriter);
