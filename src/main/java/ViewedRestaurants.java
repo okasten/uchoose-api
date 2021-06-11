@@ -18,7 +18,7 @@ public class ViewedRestaurants{
      viewedRestaurants.add(r);
      return viewedRestaurants;
  }
-
+@Override
  public String toString(){
      String viewed= "";
      for (Restaurant r:viewedRestaurants){

@@ -91,7 +91,7 @@ public class Restaurant {
 
     @Override
     public String toString() {
-        return this.name + "\n" + this.location;
+        return "\n" + this.name + " " + this.location;
     }
 
 

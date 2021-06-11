@@ -15,7 +15,7 @@ public class UserHistory {
     public static String viewAllHistory(){
         String userH = "";
         for (Map.Entry<User,ViewedRestaurants> entry : userHistory.entrySet()){
-            userH += "Username" + ":"+entry.getKey().username + ":" + entry.getValue().toString();
+            userH += "Username" + ":"+entry.getKey().username  + entry.getValue().toString()  ;
 
         }
         return userH;
