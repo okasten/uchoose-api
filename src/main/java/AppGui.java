@@ -13,6 +13,8 @@ class AppGui{
     private JLabel statusLabel;
     private JPanel controlPanel;
     private JLabel msglabel;
+    private JMenuBar menuBar;
+    private JMenu menu;
     private User user;
 
     public AppGui(){
@@ -49,16 +51,20 @@ class AppGui{
      }
 
     private void showOpeningFrame(){
-        headerLabel.setText("Uchoose");   
+        headerLabel.setText("Uchoose");
+        menuBar = new JMenuBar();  
+        menu = new JMenu("Menu");
+        menuBar.add(menu);
 
         JButton loginButton = new JButton("Login");
         JButton signupButton = new JButton("Signup");
         
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-               showLoginFrame();
-               controlPanel.remove(loginButton);
-               controlPanel.remove(signupButton);
+                showLoginFrame();
+                controlPanel.remove(loginButton);
+                controlPanel.remove(signupButton);
+                mainFrame.setJMenuBar(menuBar);
             }
         });
 
@@ -67,6 +73,7 @@ class AppGui{
                 showCreateUserFrame();
                 controlPanel.remove(loginButton);
                 controlPanel.remove(signupButton);
+                mainFrame.setJMenuBar(menuBar);
             }
         });
         controlPanel.add(loginButton);
@@ -92,11 +99,8 @@ class AppGui{
                 boolean validated = User.createUserAccount(username.getText(), firstName.getText(), lastName.getText(), zipcode.getText());
                 if(validated){
                     user = new User(username.getText(), firstName.getText(), lastName.getText(), zipcode.getText(), false);
-                    controlPanel.remove(username);
-                    controlPanel.remove(firstName);
-                    controlPanel.remove(lastName);
-                    controlPanel.remove(zipcode);
-                    create.setVisible(false);
+                    controlPanel.removeAll();
+                    controlPanel.repaint();
                     showFindRestaurantFrame();
                 }
                 else{
@@ -106,6 +110,20 @@ class AppGui{
         });
 
         controlPanel.add(create);
+        goBackMainFrame();   
+    }
+
+    private void goBackMainFrame(){
+        JMenuItem goBack = new JMenuItem("Back to Main Page");
+        menu.add(goBack);
+        goBack.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                controlPanel.removeAll();
+                controlPanel.repaint();
+                mainFrame.setJMenuBar(null);
+                showOpeningFrame();
+            }
+        });
     }
 
     private void showLoginFrame(){
@@ -129,10 +147,29 @@ class AppGui{
                 
             }
         });
+
+        goBackMainFrame();
     }
 
     private void showFindRestaurantFrame(){
         headerLabel.setText("I'm Hungry");
+        restaurantSearch();
+        adventurousSearch();
+    }
+
+    private void adventurousSearch(){
+        JLabel adventurousLabel = new JLabel("We'll give you some coordinates, and it'll be a fun surprise!", JLabel.CENTER);
+        JButton adventurousButton = new JButton("Feeling Adventurous?");
+        controlPanel.add(adventurousLabel);
+        controlPanel.add(adventurousButton);
+
+        adventurousButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                callRestaurant(null);
+            }
+        });
+    }
+    private void restaurantSearch(){
         JLabel moodLabel = new JLabel("What's your mood?", JLabel.CENTER);
         JComboBox<String> moodsDropdown = new JComboBox<String>(Mood.getMoods());
         JButton searchButton = new JButton("Find me FOOD!");
@@ -141,21 +178,9 @@ class AppGui{
         controlPanel.add(moodsDropdown);
         controlPanel.add(searchButton);
 
-        JLabel adventurousLabel = new JLabel("We'll give you some coordinates, and it'll be a fun surprise!", JLabel.CENTER);
-        JButton adventurousButton = new JButton("Feeling Adventurous?");
-        controlPanel.add(adventurousLabel);
-        controlPanel.add(adventurousButton);
-
-
         searchButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 callRestaurant(moodsDropdown.getSelectedItem().toString());
-            }
-        });
-
-        adventurousButton.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                callRestaurant(null);
             }
         });
     }
