@@ -96,7 +96,8 @@ class AppGui{
                     controlPanel.remove(firstName);
                     controlPanel.remove(lastName);
                     controlPanel.remove(zipcode);
-                    controlPanel.remove(create);
+                    create.setVisible(false);
+                    showFindRestaurantFrame();
                 }
                 else{
                     statusLabel.setText("Username already exists, please choose a different username.");
