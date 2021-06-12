@@ -110,10 +110,10 @@ class AppGui{
         });
 
         controlPanel.add(create);
-        goBackMainFrame();   
+        goBackMenuItem();   
     }
 
-    private void goBackMainFrame(){
+    private void goBackMenuItem(){
         JMenuItem goBack = new JMenuItem("Back to Main Page");
         menu.add(goBack);
         goBack.addActionListener(new ActionListener(){
@@ -148,13 +148,68 @@ class AppGui{
             }
         });
 
-        goBackMainFrame();
+        goBackMenuItem();
     }
 
     private void showFindRestaurantFrame(){
         headerLabel.setText("I'm Hungry");
+        menu.removeAll();
+        logoutMenuItem();
+        changeLocationMenuItem();
         restaurantSearch();
         adventurousSearch();
+    }
+
+    private void changeLocationMenuItem(){
+        JMenuItem changeLoc = new JMenuItem("Change Location");
+        menu.add(changeLoc);
+
+        changeLoc.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                controlPanel.removeAll();
+                controlPanel.repaint();
+                controlPanel.revalidate();
+                changeLocationFrame();
+            }
+        });
+    }
+
+    private void changeLocationFrame(){
+        JLabel label = new JLabel("Zipcode");
+        JTextField newZip = new JTextField("", 20);
+        JButton submit = new JButton("Update Location");
+        statusLabel.setText("Changing location will change current session's location only");
+        
+        controlPanel.add(label);
+        controlPanel.add(newZip);
+        controlPanel.add(submit);
+
+        submit.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                user.changeLocation(newZip.getText());
+                controlPanel.removeAll();
+                controlPanel.repaint();
+                controlPanel.revalidate();
+                statusLabel.setText("");
+                showFindRestaurantFrame();
+            }
+        });
+    }
+
+    private void logoutMenuItem(){
+        JMenuItem logout = new JMenuItem("Logout");
+        menu.add(logout);
+
+        logout.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                controlPanel.removeAll();
+                controlPanel.repaint();
+                statusLabel.setText("");
+                user = null;
+                mainFrame.setJMenuBar(null);
+                showOpeningFrame();
+            }
+        });
     }
 
     private void adventurousSearch(){
