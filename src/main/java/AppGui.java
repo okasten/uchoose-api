@@ -1,6 +1,11 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
+import java.net.MalformedURLException;
+
 import javax.swing.*;
+
+import org.json.JSONException;
 
 class AppGui{
     private JFrame mainFrame;
@@ -127,7 +132,7 @@ class AppGui{
 
     private void showFindRestaurantFrame(){
         headerLabel.setText("I'm Hungry");
-        JLabel moodLabel = new JLabel("What's your mood?");
+        JLabel moodLabel = new JLabel("What's your mood?", JLabel.CENTER);
         JComboBox<String> moodsDropdown = new JComboBox<String>(Mood.getMoods());
         JButton searchButton = new JButton("Find me FOOD!");
         
@@ -135,12 +140,52 @@ class AppGui{
         controlPanel.add(moodsDropdown);
         controlPanel.add(searchButton);
 
+        JLabel adventurousLabel = new JLabel("We'll give you some coordinates, and it'll be a fun surprise!", JLabel.CENTER);
+        JButton adventurousButton = new JButton("Feeling Adventurous?");
+        controlPanel.add(adventurousLabel);
+        controlPanel.add(adventurousButton);
+
+
         searchButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                QueryString qs = Mood.getQs("tired", user.location);
-                System.out.println(qs);
+                callRestaurant(moodsDropdown.getSelectedItem().toString());
+            }
+        });
+
+        adventurousButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                callRestaurant(null);
             }
         });
     }
 
+    private void formatRestaurant(Restaurant r){
+        String[] loc = r.location.split(",");
+        String street = loc[0].replace("[\"", "").replace("\"", "");
+        String city = loc[1].replace("\"", "") + "," + loc[2].replace("\"]", "");
+        statusLabel.setText("<html><b>We chose:</b><em> <br/>" + r.name + "<br/>" + street + "<br/>" + city + "</em></html>");
+    }
+
+    private void callRestaurant(String mood){
+        try{
+            if(mood != null){
+                QueryString qs = Mood.getQs(mood, user.location);
+                Restaurant r = Restaurant.getResturant(qs);
+                formatRestaurant(r);
+            }
+            else{
+                String r = Restaurant.feelingAdventurous(user.location);
+                statusLabel.setText("<html><b>Good Luck:</b><br/>" + r + "</html>");
+            }
+        }
+        catch (JSONException j){
+            statusLabel.setText("Hmmm, something went wrong while choosing your restaurant");
+        }
+        catch (MalformedURLException j){
+            statusLabel.setText("Hmmm, something went wrong while choosing your restaurant");
+        }
+        catch (IOException j){
+            statusLabel.setText("Hmmm, something went wrong while choosing your restaurant");
+        }
+    }
 }
