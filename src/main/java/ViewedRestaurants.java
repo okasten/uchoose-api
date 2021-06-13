@@ -37,14 +37,14 @@ public class ViewedRestaurants{
         Object obj = parser.parse(new FileReader("data/ViewRestaurant.json"));
         JSONObject objJsonObject = new JSONObject(obj.toString());
         JSONArray list = objJsonObject.getJSONArray("vee123");
-        //System.out.println(list);
+        System.out.println(list);
 
         //for writing and updating the file
-        ObjectMapper mapper = new ObjectMapper();
+       /* ObjectMapper mapper = new ObjectMapper();
         String key = "vee123";
         JSONObject root = mapper.readValue(new File("data/ViewRestaurant.json"), JSONObject.class);
         String val_older = root.getString(key);
-        System.out.println(val_older);
+        System.out.println(val_older);*/
 
 
 
