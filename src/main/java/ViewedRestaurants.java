@@ -12,9 +12,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ViewedRestaurants{
 
-    ArrayList<Restaurant> viewedRestaurants = new ArrayList<Restaurant>();
+    static ArrayList<Restaurant> viewedRestaurants = new ArrayList<Restaurant>();
 
- public ArrayList<Restaurant> addToViewed(Restaurant r){
+ public static ArrayList<Restaurant> addToViewed(Restaurant r){
      viewedRestaurants.add(r);
      return viewedRestaurants;
  }
@@ -26,6 +26,8 @@ public class ViewedRestaurants{
      }
          return viewed;
  }
+
+
 
     public static void main(String[] args) throws JSONException, FileNotFoundException, IOException, ParseException, JsonMappingException {
      User test = new User("awatkins","Andrea","Watkins","60622");

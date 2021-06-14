@@ -10,7 +10,7 @@ public class Restaurant {
     public String location;
     public String longitude;
     public String latitude;
-    public static User user = new User();
+   // public static User user = new User();
 
     public Restaurant() {
     }
@@ -60,8 +60,8 @@ public class Restaurant {
         } else {
             System.out.println("GET request not worked");
         }
-        user.viewed.addToViewed(result);
-        UserHistory.addUser(user);
+       User.viewed.addToViewed(result);
+
         return result;
 
     }

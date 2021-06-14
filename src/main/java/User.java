@@ -83,7 +83,9 @@ public class User{
         
     }
 
-
+    public static ViewedRestaurants getViewedRestaurants() {
+        return viewed;
+    }
 
 
     }
