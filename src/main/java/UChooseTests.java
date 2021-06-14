@@ -34,7 +34,7 @@ public class UChooseTests {
     }
 
     @Test
-    public void feelingAdventurousTestNoRepeats() throws JSONException, IOException {
+    public void feelingAdventurousTestNoRepeats() throws JSONException, IOException, ParseException {
         User test = new User("Test", "Test", "Test", "60622");
         QueryString query1 = new QueryString("location", test.location);
         QueryString query2 = new QueryString("location", test.location);
@@ -44,7 +44,7 @@ public class UChooseTests {
     }
 
     @Test
-    public void getRestaurantNotWorkedTest() throws JSONException, IOException {
+    public void getRestaurantNotWorkedTest() throws JSONException, IOException, ParseException {
         User test = new User("Test", "Test", "Test", "60622");
         QueryString query1 = new QueryString("locaion", test.location);
         Restaurant r = new Restaurant();

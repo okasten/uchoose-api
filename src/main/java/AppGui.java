@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 
 import org.json.JSONException;
+import org.json.simple.parser.ParseException;
 
 class AppGui{
     private JFrame mainFrame;
@@ -219,7 +220,11 @@ class AppGui{
 
         adventurousButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                callRestaurant(null);
+                try {
+                    callRestaurant(null);
+                } catch (ParseException parseException) {
+                    parseException.printStackTrace();
+                }
             }
         });
     }
@@ -234,7 +239,11 @@ class AppGui{
 
         searchButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                callRestaurant(moodsDropdown.getSelectedItem().toString());
+                try {
+                    callRestaurant(moodsDropdown.getSelectedItem().toString());
+                } catch (ParseException parseException) {
+                    parseException.printStackTrace();
+                }
             }
         });
     }
@@ -251,7 +260,7 @@ class AppGui{
         statusLabel.add(choose);
     }
 
-    private void callRestaurant(String mood){
+    private void callRestaurant(String mood) throws ParseException {
         try{
             if(mood != null){
                 QueryString qs = Mood.getQs(mood, user.location);

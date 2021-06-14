@@ -11,7 +11,7 @@ public class Restaurant {
     public String location;
     public String longitude;
     public String latitude;
-    public static User user = new User();
+    public static User user = new User("Andrea123","Andrea","Watkins","60622");
 
     public Restaurant() {
     }
@@ -83,7 +83,7 @@ public class Restaurant {
 
     }
 
-    public static String feelingAdventurous(String location) throws MalformedURLException, IOException, JSONException {
+    public static String feelingAdventurous(String location) throws MalformedURLException, IOException, JSONException, ParseException {
         Restaurant mysteryRestaurant;
         QueryString query = new QueryString("location", location);
         mysteryRestaurant = (getResturant(query));
@@ -97,9 +97,9 @@ public class Restaurant {
     }
 
 
-    public static void main(String[] args) throws MalformedURLException, IOException, JSONException {
+    public static void main(String[] args) throws MalformedURLException, IOException, JSONException, ParseException {
 
-       User testUser = new User("Test", "Test", "Test", "60622");
+       User testUser = new User("vee123", "vee", "Nguyen", "60622");
 //
        QueryString query = new QueryString("location", "01503");
         Restaurant r = (getResturant(query));
@@ -107,10 +107,11 @@ public class Restaurant {
         Restaurant r2 = (getResturant(query));
         QueryString query2 = new QueryString("location", "01503");
         Restaurant r3 = (getResturant(query));
-        //System.out.println(testUser.viewed);
-        System.out.println(UserHistory.viewAllHistory());
-//
-//
+        System.out.println(user.viewed);
+        System.out.println(UserHistory.userHistory.get("Andrea123"));
+        System.out.println("Andrea's History");
+        System.out.println(UserHistory.viewAllHistory(user));
+
 //        Mood moodSearch = new Mood();
 //        QueryString qs = moodSearch.getQs("lazy",testUser.location);
 //        System.out.println(getResturant(qs));
