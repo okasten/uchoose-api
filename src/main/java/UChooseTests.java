@@ -1,4 +1,5 @@
 import org.json.JSONException;
+import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -12,7 +13,7 @@ import static org.junit.Assert.fail;
 public class UChooseTests {
 
     @Test
-    public void NoRepeatRestaurantsBackToBackTest() throws JSONException, IOException {
+    public void NoRepeatRestaurantsBackToBackTest() throws JSONException, IOException, ParseException {
         User test = new User("Test", "Test", "Test", "60622");
         QueryString query1 = new QueryString("location", test.location);
         QueryString query2 = new QueryString("location", test.location);
@@ -23,7 +24,7 @@ public class UChooseTests {
     }
 
     @Test
-    public void restaurantToStringTest() throws JSONException, IOException {
+    public void restaurantToStringTest() throws JSONException, IOException, ParseException {
         User test = new User("Test", "Test", "Test", "60622");
         QueryString query = new QueryString("location", test.location);
         Restaurant r = (Restaurant.getResturant(query));

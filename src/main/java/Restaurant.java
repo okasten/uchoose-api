@@ -2,6 +2,7 @@ import java.util.*;
 import java.io.*;
 import java.net.*;
 import org.json.*;
+import org.json.simple.parser.ParseException;
 
 
 public class Restaurant {
@@ -10,7 +11,7 @@ public class Restaurant {
     public String location;
     public String longitude;
     public String latitude;
-   // public static User user = new User();
+    public static User user = new User();
 
     public Restaurant() {
     }
@@ -41,7 +42,7 @@ public class Restaurant {
         return "Bearer " + prop.getProperty("api_key");
     }
 
-    public static Restaurant getResturant(QueryString query) throws MalformedURLException, IOException, JSONException {
+    public static Restaurant getResturant(QueryString query) throws MalformedURLException, IOException, JSONException, ParseException {
         Restaurant result = new Restaurant();
         URL url = new URL(query.toString());
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -61,6 +62,7 @@ public class Restaurant {
             System.out.println("GET request not worked");
         }
        User.viewed.addToViewed(result);
+        UserHistory.addUser(user);
 
         return result;
 
