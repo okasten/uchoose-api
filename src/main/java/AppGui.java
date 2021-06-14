@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 
 import org.json.JSONException;
 
@@ -12,7 +13,6 @@ class AppGui{
     private JLabel headerLabel;
     private JLabel statusLabel;
     private JPanel controlPanel;
-    private JLabel msglabel;
     private JMenuBar menuBar;
     private JMenu menu;
     private User user;
@@ -38,8 +38,7 @@ class AppGui{
         });    
         headerLabel = new JLabel("Welcome to Uchoose!", JLabel.CENTER);        
         statusLabel = new JLabel("",JLabel.CENTER);    
-        statusLabel.setSize(350,100);
-        msglabel = new JLabel("", JLabel.CENTER);
+        statusLabel.setSize(500,100);
   
         controlPanel = new JPanel();
         controlPanel.setLayout(new FlowLayout());
@@ -244,7 +243,12 @@ class AppGui{
         String[] loc = r.location.split(",");
         String street = loc[0].replace("[\"", "").replace("\"", "");
         String city = loc[1].replace("\"", "") + "," + loc[2].replace("\"]", "");
+        statusLabel.setLayout(new FlowLayout());
+        statusLabel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+        // statusLabel.setPreferredSize(new Dimension(200, 30));
         statusLabel.setText("<html><b>We chose:</b><em> <br/>" + r.name + "<br/>" + street + "<br/>" + city + "</em></html>");
+        JButton choose = new JButton("Save Restaurant");
+        statusLabel.add(choose);
     }
 
     private void callRestaurant(String mood){
