@@ -156,8 +156,39 @@ class AppGui{
         menu.removeAll();
         logoutMenuItem();
         changeLocationMenuItem();
+        viewedRestaurantsMenuItem();
         restaurantSearch();
         adventurousSearch();
+    }
+
+    private void viewedRestaurantsMenuItem(){
+        JMenuItem viewedRes = new JMenuItem("View Saved Restaurants");
+        menu.add(viewedRes);
+
+        viewedRes.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                controlPanel.removeAll();
+                controlPanel.repaint();
+                controlPanel.revalidate();
+                viewedRestaurantsFrame();
+            }
+        });
+    }
+
+    private void viewedRestaurantsFrame(){
+        statusLabel.setText("");
+        statusLabel.removeAll();
+        headerLabel.setText("<html><b>Saved Restaurants</b></html>");
+        String rstring = user.getViewedRestaurants().toString();
+        String result = "<html>";
+        // for(String r: rs){
+        //     String[] loc = r.split(" ");
+        //     String street = loc[0].replace("[\"", "").replace("\"", "");
+        //     String city = loc[1].replace("\"", "") + "," + loc[2].replace("\"]", "");
+        //     result += ("<br/>" + loc[0] + "<br/>" + street + "<br/>" + city);
+        // }
+        result += "restaurants go here</html>";
+        controlPanel.add(new JLabel(result));
     }
 
     private void changeLocationMenuItem(){
@@ -175,6 +206,7 @@ class AppGui{
     }
 
     private void changeLocationFrame(){
+        headerLabel.setText("Change Location");
         JLabel label = new JLabel("Zipcode");
         JTextField newZip = new JTextField("", 20);
         JButton submit = new JButton("Update Location");
@@ -253,11 +285,26 @@ class AppGui{
         String street = loc[0].replace("[\"", "").replace("\"", "");
         String city = loc[1].replace("\"", "") + "," + loc[2].replace("\"]", "");
         statusLabel.setLayout(new FlowLayout());
-        statusLabel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-        // statusLabel.setPreferredSize(new Dimension(200, 30));
         statusLabel.setText("<html><b>We chose:</b><em> <br/>" + r.name + "<br/>" + street + "<br/>" + city + "</em></html>");
-        JButton choose = new JButton("Save Restaurant");
-        statusLabel.add(choose);
+    }
+
+    private void saveRestaurantButton(Restaurant r){
+        statusLabel.removeAll();
+        JButton saveButton = new JButton("Save Restaurant");
+        statusLabel.add(saveButton);
+
+        saveButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                try{
+                    User.viewed.addToViewed(r);
+                    UserHistory.addUser(user);
+                }
+                catch(JSONException | ParseException | IOException ex){
+                    System.out.println("Save failed");
+                }
+                
+            }
+        });
     }
 
     private void callRestaurant(String mood) throws ParseException {
@@ -266,6 +313,7 @@ class AppGui{
                 QueryString qs = Mood.getQs(mood, user.location);
                 Restaurant r = Restaurant.getResturant(qs);
                 formatRestaurant(r);
+                saveRestaurantButton(r);
             }
             else{
                 String r = Restaurant.feelingAdventurous(user.location);

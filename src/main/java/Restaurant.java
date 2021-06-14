@@ -61,9 +61,8 @@ public class Restaurant {
         } else {
             System.out.println("GET request not worked");
         }
-       User.viewed.addToViewed(result);
+        User.viewed.addToViewed(result);
         UserHistory.addUser(user);
-
         return result;
 
     }

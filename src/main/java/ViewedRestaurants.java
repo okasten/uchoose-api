@@ -14,7 +14,7 @@ public class ViewedRestaurants{
 
     static ArrayList<Restaurant> viewedRestaurants = new ArrayList<Restaurant>();
 
- public static ArrayList<Restaurant> addToViewed(Restaurant r){
+ public ArrayList<Restaurant> addToViewed(Restaurant r){
      viewedRestaurants.add(r);
      return viewedRestaurants;
  }
