@@ -21,10 +21,16 @@ public class UserHistory {
        JSONParser parser = new JSONParser();
        Object obj = parser.parse(new FileReader("data/ViewRestaurant.json"));
        JSONObject objJsonObject = new JSONObject(obj.toString());
-       String oldValue = objJsonObject.getString(user.username);
-        //JSONObject list = objJsonObject.getJSONObject(user.username);
-        String userHis = oldValue+ userHistory.get(user.username).toString();
-        objJsonObject.put(user.username, (userHis));
+        try {
+            String oldValue = objJsonObject.getString(user.username);
+            //JSONObject list = objJsonObject.getJSONObject(user.username);
+            String userHis = oldValue + userHistory.get(user.username).toString();
+            objJsonObject.put(user.username, (userHis));
+        }
+       catch(JSONException e){
+            String userHis =  userHistory.get(user.username).toString();
+            objJsonObject.put(user.username, userHis);
+        }
         try {
             FileWriter myWriter = new FileWriter("data/ViewRestaurant.json");
             myWriter.write(objJsonObject.toString());
@@ -44,8 +50,6 @@ public class UserHistory {
     }
 
     public static void main(String[] args) throws JSONException, FileNotFoundException, IOException, ParseException, JsonMappingException {
-
-
 
 
 
