@@ -153,6 +153,7 @@ class AppGui{
 
     private void showFindRestaurantFrame(){
         headerLabel.setText("I'm Hungry");
+        statusLabel.setText("");
         menu.removeAll();
         logoutMenuItem();
         changeLocationMenuItem();
@@ -175,20 +176,52 @@ class AppGui{
         });
     }
 
+    private void findRestaurantMenuItem(){
+        JMenuItem resSearch = new JMenuItem("Find Food");
+        menu.add(resSearch);
+
+        resSearch.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                controlPanel.removeAll();
+                controlPanel.repaint();
+                controlPanel.revalidate();
+                showFindRestaurantFrame();
+
+            }
+        });
+    }
+
     private void viewedRestaurantsFrame(){
+        findRestaurantMenuItem();
         statusLabel.setText("");
         statusLabel.removeAll();
         headerLabel.setText("<html><b>Saved Restaurants</b></html>");
-        String rstring = user.getViewedRestaurants().toString();
-        String result = "<html>";
-        // for(String r: rs){
-        //     String[] loc = r.split(" ");
-        //     String street = loc[0].replace("[\"", "").replace("\"", "");
-        //     String city = loc[1].replace("\"", "") + "," + loc[2].replace("\"]", "");
-        //     result += ("<br/>" + loc[0] + "<br/>" + street + "<br/>" + city);
-        // }
-        result += "restaurants go here</html>";
-        controlPanel.add(new JLabel(result));
+        try{
+            String rstring = UserHistory.viewAllHistory(user);
+            String result = "<html>";
+            String[] loc = rstring.split("\n");
+            for(String r: loc){
+                if(r.equals("")) continue;
+                String[] rest = r.split("\\[");
+                String name = rest[0];
+                String[] address = rest[1].split(",", 2);
+                String street = address[0].replaceAll("\"", "");
+                String city = address[1].replace("\"", "").replace("]", "");
+                result += ("<br/><b>" + name + "</b><br/>" + street + "<br/>" + city + "<br/>");
+            }
+            result += "</html>";
+            JLabel restaurants = new JLabel(result);
+            JScrollPane scroll = new JScrollPane();
+            scroll.createVerticalScrollBar();
+            scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+            scroll.setViewportView(restaurants);
+            scroll.setPreferredSize(new Dimension(500, 150));
+            controlPanel.add(scroll);
+        }
+        catch(IOException | JSONException| ParseException e){
+            controlPanel.add(new JLabel("Oops. There was a problem fetching saved restaurants"));
+        }
+        
     }
 
     private void changeLocationMenuItem(){
@@ -206,10 +239,12 @@ class AppGui{
     }
 
     private void changeLocationFrame(){
+        findRestaurantMenuItem();
         headerLabel.setText("Change Location");
         JLabel label = new JLabel("Zipcode");
         JTextField newZip = new JTextField("", 20);
         JButton submit = new JButton("Update Location");
+        statusLabel.removeAll();
         statusLabel.setText("Changing location will change current session's location only");
         
         controlPanel.add(label);

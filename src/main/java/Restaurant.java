@@ -110,13 +110,6 @@ public class Restaurant {
         System.out.println(UserHistory.userHistory.get("Andrea123"));
         System.out.println("Andrea's History");
         System.out.println(UserHistory.viewAllHistory(user));
-
-//        Mood moodSearch = new Mood();
-//        QueryString qs = moodSearch.getQs("lazy",testUser.location);
-//        System.out.println(getResturant(qs));
-//
-//        System.out.println(feelingAdventurous(testUser.location));
-//
    }
 }
 
