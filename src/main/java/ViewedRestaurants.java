@@ -3,12 +3,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import com.fasterxml.jackson.databind.JsonMappingException;
 import org.json.*;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 public class ViewedRestaurants{
 
@@ -29,7 +27,7 @@ public class ViewedRestaurants{
 
 
 
-    public static void main(String[] args) throws JSONException, FileNotFoundException, IOException, ParseException, JsonMappingException {
+    public static void main(String[] args) throws JSONException, FileNotFoundException, IOException, ParseException {
      //User test = new User("awatkins","Andrea","Watkins","60622");
      //QueryString query1 = new QueryString("location", test.location);
      //Restaurant.getResturant(query1);

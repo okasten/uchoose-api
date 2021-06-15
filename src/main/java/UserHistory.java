@@ -1,4 +1,4 @@
-import com.fasterxml.jackson.databind.JsonMappingException;
+//import com.fasterxml.jackson.databind.JsonMappingException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,7 +49,7 @@ public class UserHistory {
 
     }
 
-    public static void main(String[] args) throws JSONException, FileNotFoundException, IOException, ParseException, JsonMappingException {
+    public static void main(String[] args) throws JSONException, FileNotFoundException, IOException, ParseException {
 
 
 
